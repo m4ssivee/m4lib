@@ -11,6 +11,7 @@ public class M4Lib implements ClientModInitializer {
     
     private static M4Lib instance;
     private NametagRenderer nametagRenderer;
+    private com.m4ssive.m4lib.util.PlayerTracker playerTracker;
     
     @Override
     public void onInitializeClient() {
@@ -19,7 +20,12 @@ public class M4Lib implements ClientModInitializer {
         
         nametagRenderer = new NametagRenderer();
         LOGGER.info("NametagRenderer created and ready");
-        LOGGER.info("m4lib is ready to receive nametag registrations from other mods");
+        
+        playerTracker = new com.m4ssive.m4lib.util.PlayerTracker(net.minecraft.client.MinecraftClient.getInstance());
+        LOGGER.info("PlayerTracker created and ready");
+        
+        LOGGER.info("m4lib is ready to receive registrations from other mods");
+        LOGGER.info("Available utilities: NametagRenderer, PlayerTracker, PotionHelper, ItemEntityTracker, ColorHelper");
     }
     
     public static M4Lib getInstance() {
@@ -28,6 +34,10 @@ public class M4Lib implements ClientModInitializer {
     
     public NametagRenderer getNametagRenderer() {
         return nametagRenderer;
+    }
+    
+    public com.m4ssive.m4lib.util.PlayerTracker getPlayerTracker() {
+        return playerTracker;
     }
 }
 

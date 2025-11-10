@@ -10,9 +10,12 @@ m4lib is a shared library mod that provides common functionality for m4ssive's M
 
 ## Features
 
-- Nametag rendering utilities
-- Entity interaction helpers
-- Common utilities for m4ssive mods
+- **Nametag Rendering**: Custom nametag rendering system for mods
+- **PotionHelper**: Utility for potion type detection and categorization
+- **ItemEntityTracker**: Generic ItemEntity tracking with duplicate prevention
+- **PlayerTracker**: Player data tracking and management utility
+- **ColorHelper**: Color manipulation and blending utilities
+- **Entity Interactions**: Mixins for player and entity interactions
 
 ## Requirements
 
@@ -35,7 +38,50 @@ This is a library mod - it provides functionality for other mods. Install it if 
 ## Mods Using m4lib
 
 - TotemCounterV2
+- PotCounter
 - (Add other mods that use m4lib here)
+
+## API Usage
+
+### PotionHelper
+```java
+import com.m4ssive.m4lib.util.PotionHelper;
+
+// Check if item is a potion
+if (PotionHelper.isPotionItem(stack)) {
+    PotionHelper.PotionType type = PotionHelper.getPotionType(stack);
+    String displayName = PotionHelper.getPotionTypeDisplayName(type);
+}
+```
+
+### ItemEntityTracker
+```java
+import com.m4ssive.m4lib.util.ItemEntityTracker;
+
+ItemEntityTracker tracker = new ItemEntityTracker(
+    100, // cooldown in ms
+    itemEntity -> /* filter condition */,
+    itemEntity -> /* callback */
+);
+tracker.processItemEntity(itemEntity);
+```
+
+### PlayerTracker
+```java
+import com.m4ssive.m4lib.util.PlayerTracker;
+
+PlayerTracker tracker = M4Lib.getInstance().getPlayerTracker();
+PlayerTracker.PlayerData data = tracker.getOrCreatePlayerData(uuid);
+data.setCustomData("key", value);
+```
+
+### ColorHelper
+```java
+import com.m4ssive.m4lib.util.ColorHelper;
+
+int blended = ColorHelper.blendColors(color1, color2, 0.5f);
+int withAlpha = ColorHelper.withAlpha(color, 128);
+```
 
 ## License
 
