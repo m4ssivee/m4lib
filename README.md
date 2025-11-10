@@ -39,7 +39,6 @@ This is a library mod - it provides functionality for other mods. Install it if 
 
 - TotemCounterV2
 - PotCounter
-- (Add other mods that use m4lib here)
 
 ## API Usage
 
