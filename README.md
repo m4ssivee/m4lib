@@ -2,7 +2,7 @@
 
 ![Banner](src/main/resources/assets/m4lib/banner.png)
 
-Library mod for m4ssive's mods - Provides common utilities for nametag rendering and entity interactions.
+Library mod for m4ssive's mods - Provides common utilities for nametag rendering and entity interactions and gui improvements,can be used with other libary mods,can act like any libary mod!
 
 ## Description
 
