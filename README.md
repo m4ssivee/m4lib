@@ -35,7 +35,7 @@ This is a library mod - it provides functionality for other mods. Install it if 
 ## Mods Using m4lib
 
 - TotemCounterV2
-- (Add other mods that use m4lib here)
+
 
 ## License
 
