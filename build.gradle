@@ -1,0 +1,82 @@
+plugins {
+	id 'fabric-loom' version '1.7.4'
+	id 'maven-publish'
+}
+
+sourceCompatibility = JavaVersion.VERSION_21
+targetCompatibility = JavaVersion.VERSION_21
+
+group = project.maven_group
+version = project.mod_version
+archivesBaseName = project.archives_base_name
+
+repositories {
+	maven { url 'https://maven.fabricmc.net/' }
+	maven { url 'https://maven.terraformersmc.com/releases/' }
+	maven { url 'https://jitpack.io' }
+	maven { url 'https://maven.shedaniel.me/releases' }
+	mavenCentral()
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	
+	// MixinExtras is automatically provided by Fabric Loom at both compile-time and runtime
+	// No need to add it manually - Fabric Loom handles it automatically
+}
+
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
+}
+
+loom {
+	mixin {
+		defaultRefmapName = "m4lib-refmap.json"
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.encoding = "UTF-8"
+	it.options.release = 21
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+	withSourcesJar()
+}
+
+jar {
+	from("LICENSE") {
+		rename { "${it}_${project.archivesBaseName}"}
+	}
+}
+
+publishing {
+	publications {
+		maven(MavenPublication) {
+			from components.java
+			groupId = project.maven_group
+			artifactId = project.archives_base_name
+			version = project.mod_version
+		}
+	}
+	repositories {
+		maven {
+			name = "local"
+			url = uri("file://${System.getProperty("user.home")}/.m2/repository")
+		}
+		maven {
+			name = "projectLocal"
+			url = uri("file://${project.projectDir}/../TotemCounterV2/libs")
+		}
+	}
+}

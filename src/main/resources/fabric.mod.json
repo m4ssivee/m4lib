@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "m4lib",
+  "version": "1.0.0",
+  "name": "m4lib",
+  "description": "Library mod for m4ssive's mods - Provides common utilities for nametag rendering and entity interactions",
+  "authors": [
+    "m4ssive"
+  ],
+  "contact": {
+    "homepage": "https://github.com/m4ssivee",
+    "sources": "https://github.com/m4ssivee/m4lib"
+  },
+  "license": "MIT",
+  "icon": "assets/m4lib/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.m4ssive.m4lib.M4Lib"
+    ]
+  },
+  "mixins": [
+    "m4lib.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.11",
+    "fabric-api": "*",
+    "minecraft": ">=1.21 <1.22",
+    "java": ">=21"
+  },
+  "custom": {
+    "modmenu": {
+      "badges": [ "library" ],
+      "banner": "assets/m4lib/banner.png"
+    }
+  }
+}
+
+
+
