@@ -1,6 +1,7 @@
 package com.m4ssive.m4lib.util;
 
 import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 
 import java.util.HashMap;
@@ -42,10 +43,12 @@ public class ItemEntityTracker {
             return;
         }
         
-        UUID throwerId = itemEntity.getThrower();
-        if (throwerId == null) {
+        Entity owner = itemEntity.getOwner();
+        if (owner == null) {
             return;
         }
+        
+        UUID throwerId = owner.getUuid();
         
         long currentTime = System.currentTimeMillis();
         Long lastTime = lastItemTime.get(throwerId);

@@ -1,7 +1,9 @@
 plugins {
-	id 'fabric-loom' version '1.7.4'
+	id 'fabric-loom' version '1.7-SNAPSHOT'
 	id 'maven-publish'
+	id 'eclipse'
 }
+
 
 sourceCompatibility = JavaVersion.VERSION_21
 targetCompatibility = JavaVersion.VERSION_21
@@ -57,6 +59,16 @@ java {
 jar {
 	from("LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
+	}
+}
+
+eclipse {
+	project {
+		name = 'm4lib'
+	}
+	classpath {
+		downloadSources = true
+		downloadJavadoc = true
 	}
 }
 

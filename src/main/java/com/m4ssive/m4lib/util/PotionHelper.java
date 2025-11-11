@@ -3,9 +3,11 @@ package com.m4ssive.m4lib.util;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionUtil;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.PotionContentsComponent;
+import net.minecraft.registry.entry.RegistryEntry;
 
 /**
  * Utility class for potion-related operations
@@ -37,13 +39,29 @@ public class PotionHelper {
     }
     
     /**
+     * Gets the potion from an ItemStack (1.21+ compatible)
+     */
+    private static Potion getPotion(ItemStack stack) {
+        if (!isPotionItem(stack)) {
+            return null;
+        }
+        
+        PotionContentsComponent potionContents = stack.get(DataComponentTypes.POTION_CONTENTS);
+        if (potionContents != null && potionContents.potion().isPresent()) {
+            return potionContents.potion().get().value();
+        }
+        
+        return null;
+    }
+    
+    /**
      * Checks if an ItemStack has a valid potion effect (not a water bottle)
      */
     public static boolean hasPotionEffect(ItemStack stack) {
         if (!isPotionItem(stack)) {
             return false;
         }
-        Potion potion = PotionUtil.getPotion(stack);
+        Potion potion = getPotion(stack);
         return potion != null && !potion.getEffects().isEmpty();
     }
     
@@ -55,7 +73,7 @@ public class PotionHelper {
             return PotionType.OTHER;
         }
         
-        Potion potion = PotionUtil.getPotion(stack);
+        Potion potion = getPotion(stack);
         if (potion == null) {
             return PotionType.OTHER;
         }
