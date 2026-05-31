@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.7-SNAPSHOT'
+	id 'fabric-loom' version '1.10.2'
 	id 'maven-publish'
 	id 'eclipse'
 }
@@ -10,7 +10,7 @@ targetCompatibility = JavaVersion.VERSION_21
 
 group = project.maven_group
 version = project.mod_version
-archivesBaseName = project.archives_base_name
+base.archivesName = project.archives_base_name
 
 repositories {
 	maven { url 'https://maven.fabricmc.net/' }
@@ -57,8 +57,10 @@ java {
 }
 
 jar {
+	from sourceSets.main.output
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
+		rename { "${it}_${project.base.archivesName.get()}"}
 	}
 }
 
