@@ -98,3 +98,6 @@ modrinth_icon.png
 libs/
 
 
+build/
+.gradle/
+versions/*/build/

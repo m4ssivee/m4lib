@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "m4lib",
-  "version": "1.0.0",
+  "version": "${version}",
   "name": "m4lib",
   "description": "Library mod for m4ssive's mods - Provides common utilities for nametag rendering and entity interactions",
   "authors": [
@@ -23,9 +23,9 @@
     "m4lib.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.15.11",
+    "fabricloader": ">=0.16.0",
     "fabric-api": "*",
-    "minecraft": "*",
+    "minecraft": "${mc_dep}",
     "java": "*"
   },
   "custom": {
